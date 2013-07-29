@@ -3,4 +3,8 @@ class HomeController < ApplicationController
   def index
 
   end
+
+  def items_catalog
+    @sales_itmes = SalesItem.all
+  end
 end

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726121150) do
+ActiveRecord::Schema.define(version: 20130729012533) do
+
+  create_table "sales_item_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sales_items", force: true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.integer  "sales_item_type_id"
+    t.boolean  "is_imported"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

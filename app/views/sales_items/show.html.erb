@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sales_item.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @sales_item.price %>
+</p>
+
+<p>
+  <strong>Sales item type:</strong>
+  <%= @sales_item.sales_item_type_id %>
+</p>
+
+<p>
+  <strong>Is imported:</strong>
+  <%= @sales_item.is_imported %>
+</p>
+
+<%= link_to 'Edit', edit_sales_item_path(@sales_item) %> |
+<%= link_to 'Back', sales_items_path %>
