@@ -1,0 +1,11 @@
+$("#items-main-div").html("<%= escape_javascript(render(:partial => "shared/receipt",
+                                                        :locals => {
+                                                                    :sales_item_details_hash => @sales_item_details_hash
+                                                                    }))%>");
+
+$("#return-button").die("click").live("click",function(){
+    $("#items-main-div").html("<%= escape_javascript(render(:partial => "sales_items/sales_item_details",
+                                                        :locals => {:sales_items => @sales_items}))%>");
+    selectedItems = [];
+    return false;
+});

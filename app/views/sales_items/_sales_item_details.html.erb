@@ -1,0 +1,25 @@
+
+<div style="float: left;">
+  <ul class="thumbnails">
+    <% sales_items.each do |sales_item|%>
+        <li class="span5 clearfix">
+          <div class="thumbnail clearfix">
+            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkzsBADqkC-ol6OPTJxB00yVRknku5UPh8tGSL-07rKAQkyNe3w" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
+            <div class="caption" class="pull-left">
+              <a href="#" id="Item-<%= sales_item.id %>" class="itemButton btn select-custom icon  pull-right">Select</a>
+              <h5>
+                <%= link_to sales_item.name,sales_item %>
+              </h5>
+              <small><b>Price: </b><%= number_to_currency(sales_item.price) %></small><br/>
+              <small><b>Type: </b><%= sales_item.sales_item_type.name %></small><br/>
+              <small><b>Imported: </b><%= sales_item.is_imported ? "Yes" : "No" %></small>
+            </div>
+          </div>
+        </li>
+    <% end %>
+
+  </ul>
+</div>
+<div >
+  <a href="#" class=" btn doneButton icon  pull-right" data-loading-text="Submitting...">Submit</a>
+</div>

@@ -9,12 +9,12 @@
 
 SalesItemType.create(name: "Book")
 SalesItemType.create(name: "Food")
-SalesItemType.create(name: "Medical Product")
+SalesItemType.create(name: "Medical")
 SalesItemType.create(name: "Other")
 
 book_type = SalesItemType.where(:name => "Book").first
 food_type = SalesItemType.where(:name => "Food").first
-medical_type = SalesItemType.where(:name => "Medical Product").first
+medical_type = SalesItemType.where(:name => "Medical").first
 other_type = SalesItemType.where(:name => "Other").first
 
 SalesItem.create(:name => "The godfather",
@@ -28,11 +28,11 @@ SalesItem.create(:name => "Shakira Music CD",
 SalesItem.create(:name => "Dark chocolate bar",
                  :price => 0.85,
                  :is_imported => false,
-                 :sales_item_type_id => other_type.id)
+                 :sales_item_type_id => food_type.id)
 SalesItem.create(:name => "Ghirardelli chocolates",
                  :price => 10.00,
                  :is_imported => true,
-                 :sales_item_type_id => other_type.id)
+                 :sales_item_type_id => food_type.id)
 SalesItem.create(:name => "Amway Men's perfume",
                  :price => 47.50,
                  :is_imported => true,
@@ -48,7 +48,7 @@ SalesItem.create(:name => "Nise pills pack",
 SalesItem.create(:name => "Bruge chocolate bunch",
                  :price => 11.25,
                  :is_imported => true,
-                 :sales_item_type_id => other_type.id)
+                 :sales_item_type_id => food_type.id)
 SalesItem.create(:name => "Tiger eyes by SRK",
                  :price => 18.99,
                  :is_imported => false,

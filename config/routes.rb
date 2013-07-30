@@ -2,14 +2,13 @@ SalesTaxCalculation::Application.routes.draw do
   resources :sales_items
 
   devise_for :users
-  root :to => "home#index"
   get "items_catalog" => "home#items_catalog"
-  resources :sales_items do
-    collection do
-      post "generate_receipt"
-    end
-  end
-
+  #resources :sales_items do
+  #  collection do
+  #    get "sales_receipt"
+  #  end
+  #end
+  post 'sales_receipt' => 'sales_items#sales_receipt'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -64,4 +63,6 @@ SalesTaxCalculation::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root :to => "home#items_catalog"
+
 end

@@ -1,32 +1,56 @@
-<div style="float: left;">
-
-  <div style="float: left;">
-<ul class="thumbnails">
-  <% @sales_itmes.each do |sales_item|%>
-  <li class="span5 clearfix">
-    <div class="thumbnail clearfix">
-      <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkzsBADqkC-ol6OPTJxB00yVRknku5UPh8tGSL-07rKAQkyNe3w" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-      <div class="caption" class="pull-left">
-        <a href="#" id="Item-<%= sales_item.id %>" class="itemButton btn select-custom icon  pull-right">Select</a>
-        <h5>
-          <%= link_to sales_item.name,sales_item %>
-        </h5>
-        <small><b>Price: </b><%= number_to_currency(sales_item.price) %></small><br/>
-        <small><b>Type: </b><%= sales_item.sales_item_type.name %></small><br/>
-        <small><b>Imported: </b><%= sales_item.is_imported ? "Yes" : "No" %></small>
-
-
-      </div>
-    </div>
-  </li>
-    <% end %>
-
-</ul>
+<div id="items-main-div">
+<%= render :partial => "sales_items/sales_item_details", :locals => {:sales_items => @sales_items} %>
 </div>
-  <div >
-    <a href="#" class=" btn doneButton icon  pull-right" data-loading-text="Submitting...">Submit</a>
-  </div>
-</div>
+
+<script type="text/javascript">
+  var selectedItems = [];
+  $(document).ready(function(){
+      $(".itemButton").die("click").live("click",function(){
+          var SalesItemId = $(this).attr('id').toString().split("-")[1];
+
+          if($(this).hasClass("select-custom"))
+          {
+              $(this).removeClass("select-custom").addClass("deselect-custom").text("Deselect");
+              selectedItems.push(parseInt(SalesItemId));
+          }
+          else
+          {
+              $(this).removeClass("deselect-custom").addClass("select-custom").text("Select");
+              var prd_index = selectedItems.indexOf(SalesItemId);
+              selectedItems.splice(prd_index,1);
+          }
+          return false;
+      });
+
+      $('.doneButton').die("click").live("click",function () {
+                  var btn = $(this);
+                  btn.button('loading');
+//                  setTimeout(function () {
+//                      btn.button('reset')
+//                  }, 3000)
+              var params = "sales_items=" +  getItemString();
+              var url = "sales_receipt";
+              $.ajax({
+                  type:"POST",
+                  url:url,
+                  data:params
+              });
+              return false;});
+  });
+  function getItemString(){
+      var idString = "";
+
+      if(selectedItems.length != 0)
+      {
+          for(var i = 0; i < selectedItems.length; i++)
+          {
+              idString = idString + selectedItems[i] + ",";
+          }
+      }
+      return idString;
+  }
+</script>
+
 <style type="text/css">
     .select-custom {
         background-color: hsl(201, 100%, 30%) !important;
@@ -79,52 +103,3 @@
         -webkit-font-smoothing: antialiased;
     }
 </style>
-
-<script type="text/javascript">
-  var selectedItems = [];
-  $(document).ready(function(){
-      $(".itemButton").click(function(){
-          var SalesItemId = $(this).attr('id').toString().split("-")[1];
-
-          if($(this).hasClass("select-custom"))
-          {
-              $(this).removeClass("select-custom").addClass("deselect-custom").text("Deselect");
-              selectedItems.push(parseInt(SalesItemId));
-          }
-          else
-          {
-              $(this).removeClass("deselect-custom").addClass("select-custom").text("Select");
-              var prd_index = selectedItems.indexOf(SalesItemId);
-              selectedItems.splice(prd_index,1);
-          }
-          return false;
-      });
-
-      $('.doneButton').click(function () {
-                  var btn = $(this);
-                  btn.button('loading');
-//                  setTimeout(function () {
-//                      btn.button('reset')
-//                  }, 3000)
-              var params = "sales_items=" +  getItemString();
-              var url = "sales_items/generate_receipt";
-              $.ajax({
-                  type:"POST",
-                  url:url,
-                  data:params
-              });
-              return false;});
-  });
-  function getItemString(){
-      var idString = "";
-
-      if(selectedItems.length != 0)
-      {
-          for(var i = 0; i < selectedItems.length; i++)
-          {
-              idString = idString + selectedItems[i] + ",";
-          }
-      }
-      return idString;
-  }
-</script>

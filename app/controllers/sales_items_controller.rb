@@ -1,4 +1,6 @@
 class SalesItemsController < ApplicationController
+  include TaxCalculator
+
   before_action :set_sales_item, only: [:show, :edit, :update, :destroy]
 
   # GET /sales_items
@@ -61,8 +63,10 @@ class SalesItemsController < ApplicationController
     end
   end
 
-  def generate_receipt
-
+  def sales_receipt
+    @sales_item_ids = params[:sales_items].split(",")
+    @sales_items  = SalesItem.all
+    @sales_item_details_hash = @sales_item_ids.present? ? get_sales_item_details_hash(@sales_item_ids) : nil
   end
 
   private

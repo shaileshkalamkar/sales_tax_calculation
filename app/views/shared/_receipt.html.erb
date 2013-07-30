@@ -1,0 +1,51 @@
+<table class="table table-stripped">
+  <thead>
+  <tr>
+    <th>Quantity</th>
+    <th>Item Name</th>
+    <th>Cost</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% sales_item_details_hash[:sales_item_details].each do |sales_item_detail| %>
+    <tr>
+      <td>1</td>
+      <td><%= sales_item_detail[0].name %></td>
+      <td><%= number_to_currency(sales_item_detail[1]) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<table class="table table-stripped">
+  <thead>
+   <th>Total tax: </th>
+   <th><%= number_to_currency(sales_item_details_hash[:total_sales_tax]) %></th>
+  </thead>
+  <thead>
+  <th>Final total: </th>
+  <th><%= number_to_currency(sales_item_details_hash[:final_total]) %></th>
+  </thead>
+</table>
+<div class="caption" class="pull-left">
+  <a href="#" id="return-button" class=" btn return-button icon  pull-right">Return</a>
+</div>
+
+<style type="text/css">
+    .return-button {
+        background-color: hsl(81, 61%, 30%) !important;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#96cd31", endColorstr="#5a7b1d");
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#96cd31), to(#5a7b1d));
+        background-image: -moz-linear-gradient(top, #96cd31, #5a7b1d);
+        background-image: -ms-linear-gradient(top, #96cd31, #5a7b1d);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #96cd31), color-stop(100%, #5a7b1d));
+        background-image: -webkit-linear-gradient(top, #96cd31, #5a7b1d);
+        background-image: -o-linear-gradient(top, #96cd31, #5a7b1d);
+        background-image: linear-gradient(#96cd31, #5a7b1d);
+        border-color: #5a7b1d #5a7b1d hsl(81, 61%, 25%);
+        color: #fff !important;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+        -webkit-font-smoothing: antialiased;
+    }
+</style>
