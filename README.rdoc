@@ -11,7 +11,7 @@ I've used devise authentication.
 * Design decision
 
 The problem statement describes sales products. I've identified it as an entity. There are number of sales products which have similar set of attributes.
-For implementation I've created model class SalesItem which is mappedd to table sales_iems.
+For implementation I've created model class SalesItem which is mapped to table sales_iems.
 
 Identified attributes -
 
@@ -33,7 +33,7 @@ I've added sales_item_type_id in the sales_items table as a foreign key.
 * Tax calculation
 
 The tax calculation is different entity which comes into the picture for calculating sales tax.
-It has static set of functions and will be same for all sales_item_types. There is no need to create instances of it. I've created a module TaxCalculator which has all the functionality to calculate tax.
+It has static set of functions and will be same for all sales_items. There is no need to create instances of it. I've created a module TaxCalculator which has all the functionality to calculate tax.
 
 
 * Shortcomings
