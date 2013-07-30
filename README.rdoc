@@ -1,28 +1,44 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+* Platform decision
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I've chosen Rails for the implemetation becuase I've sufficient knowledge of Rails for implementing the assignment. Also it was good chance for me to build an application based on latest Rails version i.e. Rails 4.0  and checking how we can use Twitter Bootstrap.
+I've used devise authentication.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+* Design decision
+
+The problem statement describes sales products. I've identified it as an entity. There are number of sales products which have similar set of attributes.
+For implementation I've created model class SalesItem which is mappedd to table sales_iems.
+
+Identified attributes -
+
+ - id
+ - Name
+ - Price
+ - sales_item_type(Book/Food etc.)
+ - is_imported
+
+There are different sales_item_types for sales items and they are repeating most of the times. To handle this data redundancy I've normalised the table sales_iems and created another model class SalesItemType
+having attributes
+
+  - Id
+  - Name
+
+Now the sales_item belongs to a item_type thats why I've added relationship has many relationship between sales_item_type and sales_items.
+I've added sales_item_type_id in the sales_items table as a foreign key.
+
+* Tax calculation
+
+The tax calculation is different entity which comes into the picture for calculating sales tax.
+It has static set of functions and will be same for all sales_item_types. There is no need to create instances of it. I've created a module TaxCalculator which has all the functionality to calculate tax.
+
+
+* Shortcomings
+
+The problem statement sample input is taking only one sales_item in quantiy. I've not implemented code for selecting more than one product for sales tax calculation.
+
+
+
