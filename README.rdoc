@@ -38,7 +38,7 @@ It has static set of functions and will be same for all sales_items. There is no
 
 * Shortcomings
 
-The problem statement sample input is taking only one sales_item in quantiy. I've not implemented code for selecting more than one product for sales tax calculation.
+The problem statement sample input is taking only one quantity of sales_items. I've not implemented code for selecting more than one product for sales tax calculation.
 
 
 
